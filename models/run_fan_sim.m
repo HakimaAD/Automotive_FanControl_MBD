@@ -1,0 +1,30 @@
+
+% temps total
+t_end = 30;      % secondes
+dt = 0.1;        % pas
+t = (0:dt:t_end)';
+
+% construire Temp: 0-10s = 70°C, 10-15s montée à 95, 15-20s maintien, 20-25s descente à 75, 25-30s oscillation autour de 85
+Temp = zeros(length(t),2);
+for i = 1:length(t)
+    tt = t(i);
+    if tt <= 10
+        val = 70;
+    elseif tt <= 15
+        val = 70 + (95-70)*(tt-10)/(5); % rampe vers 95
+    elseif tt <= 20
+        val = 95;
+    elseif tt <= 25
+        val = 95 - (95-75)*(tt-20)/(5); % rampe vers 75
+    else
+        % oscillation autour de 85 +/-6
+        val = 85 + 6*sin(2*pi*(tt-25)/2);
+    end
+    Temp(i,:) = [t(i), val];
+end
+
+% Stocker la variable dans le workspace (From Workspace attend [time, value] ou timeseries)
+assignin('base', 'Temp', Temp);
+
+% Lancer la simulation
+sim('models/FanControl.slx');
