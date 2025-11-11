@@ -1,0 +1,42 @@
+# High-Level Requirements (HLR) & Low-Level Requirements (LLR)
+## Project: Automotive Fan Control System
+### Author: Hakima Ayed
+
+---
+
+## 🔹 High-Level Requirements (HLR)
+
+| ID | Description |
+|----|--------------|
+| **HLR_1** | Le système doit activer le ventilateur si la température dépasse **90 °C**. |
+| **HLR_2** | Le système doit désactiver le ventilateur si la température descend en dessous de **80 °C**. |
+| **HLR_3** | Le système doit fournir un signal de sortie `FanStatus` (booléen) indiquant l’état du ventilateur. |
+
+---
+
+## 🔹 Low-Level Requirements (LLR)
+
+| ID | Lié à | Description |
+|----|--------|-------------|
+| **LLR_1** | HLR_1 | Si `Temp > 90`, alors `FanStatus = 1` (ventilateur activé). |
+| **LLR_2** | HLR_2 | Si `Temp < 80`, alors `FanStatus = 0` (ventilateur désactivé). |
+| **LLR_3** | HLR_1 & HLR_2 | Implémenter une **hystérésis** de 10 °C pour éviter les commutations rapides. |
+| **LLR_4** | - | (Optionnel) Ajouter un signal PWM (`FanPWM`) : `0` = OFF, `255` = ON. |
+
+---
+
+## 🔹 Notes de conception
+- Entrée : `Temp` (float, en °C)  
+- Sortie : `FanStatus` (booléen)  
+- Fréquence d’échantillonnage : 10 Hz  
+- Modèle Simulink : `FanControl.slx`  
+- Diagramme Stateflow : `Fan_OFF` ↔ `Fan_ON`  
+
+---
+
+## 🔹 Traçabilité
+| HLR | LLR | Élément implémenté |
+|------|------|-------------------|
+| HLR_1 | LLR_1 | Transition `Temp > 90` vers état `Fan_ON` |
+| HLR_2 | LLR_2 | Transition `Temp < 80` vers état `Fan_OFF` |
+| HLR_3 | LLR_3 | Sortie `FanStatus` dans Stateflow |
