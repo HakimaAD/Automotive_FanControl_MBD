@@ -26,7 +26,6 @@ end
 % Stocker la variable dans le workspace (From Workspace attend [time, value] ou timeseries)
 assignin('base', 'Temp', Temp);
 
-% Lancer la simulation
+% Lancer la simulation (assure-toi que le model s'appelle models/FanControl)
 sim('models/FanControl.slx');
-
-
+% Si tu as un 'To Workspace' nommé FanStatus_out, il sera accessible après sim
