@@ -40,6 +40,7 @@ The Simulink model consists of the following main blocks:
 5. **Interconnections / Signal Lines**
    - Role: Connects all blocks to ensure proper signal flow.
    - Function: Ensures that input, processing, and outputs communicate correctly.
+   ![alt text](image.png)
 
 ## 5. System Behavior
 - The system monitors temperature continuously.

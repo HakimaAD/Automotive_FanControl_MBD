@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'FanControl'.
  *
- * Model version                  : 1.7
+ * Model version                  : 1.8
  * Simulink Coder version         : 24.1 (R2024a) 19-Nov-2023
- * C/C++ source code generated on : Wed Nov 12 21:38:29 2025
+ * C/C++ source code generated on : Thu Nov 13 00:01:20 2025
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Intel->x86-64 (Windows64)
@@ -32,14 +32,6 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
-#ifndef rtmGetT
-#define rtmGetT(rtm)                   (rtmGetTPtr((rtm))[0])
-#endif
-
-#ifndef rtmGetTPtr
-#define rtmGetTPtr(rtm)                ((rtm)->Timing.t)
-#endif
-
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
   uint8_T is_active_c3_FanControl;     /* '<Root>/FanStateflow' */
@@ -48,22 +40,7 @@ typedef struct {
 
 /* Real-time Model Data Structure */
 struct tag_RTM_FanControl_T {
-  const char_T *errorStatus;
-  RTWSolverInfo solverInfo;
-
-  /*
-   * Timing:
-   * The following substructure contains information regarding
-   * the timing information for the model.
-   */
-  struct {
-    uint32_T clockTick0;
-    time_T stepSize0;
-    uint32_T clockTick1;
-    SimTimeStep simTimeStep;
-    time_T *t;
-    time_T tArray[2];
-  } Timing;
+  const char_T * volatile errorStatus;
 };
 
 /* Block states (default storage) */
@@ -82,6 +59,7 @@ extern RT_MODEL_FanControl_T *const FanControl_M;
  *
  * Block '<Root>/Data Type Conversion' : Unused code path elimination
  * Block '<Root>/FanStatus_Display' : Unused code path elimination
+ * Block '<Root>/FanStatus_out' : Unused code path elimination
  * Block '<Root>/Gain' : Unused code path elimination
  * Block '<Root>/Scope' : Unused code path elimination
  * Block '<Root>/Temp_In' : Unused code path elimination
